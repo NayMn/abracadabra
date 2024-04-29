@@ -1,6 +1,9 @@
 import express from "express"
 const app = express()
-app.use(express.static('public'))
+
+const __dirname = import.meta.dirname
+
+app.use(express.static(__dirname + '/public'))
 
 // archivo json: 
 const usuarios = [
@@ -41,22 +44,14 @@ app.get("/abracadabra/juego/:usuario", middlewareUno, (req, res) => {
 
 
 
-app.get("/abracadabra/coneo/:n", (req, res) => {
-    res.send("ruta tres")
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get("/abracadabra/conejo/:n", (req, res) => {
+    const n = Math.floor(Math.random() * 4 + 1).toString();
+    if (n === req.params.n) {
+        res.sendFile('voldemort.jpg', { root: './public/assets' });
+    } else {
+        res.sendFile('conejito.jpg', { root: './public/assets' });
+    }
+});
 
 
 
